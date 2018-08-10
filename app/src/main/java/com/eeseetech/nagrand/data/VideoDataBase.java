@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 
 import com.eeseetech.nagrand.Utils;
 import com.eeseetech.nagrand.entity.PlayHistoryData;
+import com.eeseetech.nagrand.entity.TimelistBean;
+import com.eeseetech.nagrand.entity.VideoInfo;
 
 import java.util.ArrayList;
 import java.util.List;

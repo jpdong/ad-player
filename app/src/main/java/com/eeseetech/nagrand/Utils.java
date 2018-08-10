@@ -8,8 +8,8 @@ import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.util.Log;
 
-import com.eeseetech.nagrand.data.TimelistBean;
-import com.eeseetech.nagrand.data.VideoInfo;
+import com.eeseetech.nagrand.entity.TimelistBean;
+import com.eeseetech.nagrand.entity.VideoInfo;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
@@ -21,7 +21,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class Utils {
     public static boolean checkVideoFile(String name) {

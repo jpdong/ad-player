@@ -1,9 +1,6 @@
 package com.eeseetech.nagrand.api;
 
-import android.util.Log;
-
-import com.eeseetech.nagrand.Global;
-import com.eeseetech.nagrand.data.VideoInfo;
+import com.eeseetech.nagrand.entity.VideoInfo;
 import com.eeseetech.nagrand.entity.Result;
 
 import org.junit.Test;
@@ -11,7 +8,6 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
-import static com.eeseetech.nagrand.entity.Result.FAIL;
 import static com.eeseetech.nagrand.entity.Result.NO_CHANGE;
 import static com.eeseetech.nagrand.entity.Result.SUCCESS;
 import static org.junit.Assert.*;

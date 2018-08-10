@@ -12,11 +12,9 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.eeseetech.nagrand.Global;
-import com.eeseetech.nagrand.api.DownloadListener;
-import com.eeseetech.nagrand.data.RemoteRepository;
 import com.eeseetech.nagrand.data.VideoDataBase;
 import com.eeseetech.nagrand.data.VideoDownloadTask;
-import com.eeseetech.nagrand.data.VideoInfo;
+import com.eeseetech.nagrand.entity.VideoInfo;
 import com.eeseetech.nagrand.data.VideoRepository;
 
 import java.util.Queue;

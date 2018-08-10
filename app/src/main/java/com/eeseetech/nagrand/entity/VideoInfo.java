@@ -1,6 +1,4 @@
-package com.eeseetech.nagrand.data;
-
-import com.eeseetech.nagrand.data.TimelistBean;
+package com.eeseetech.nagrand.entity;
 
 import java.util.List;
 

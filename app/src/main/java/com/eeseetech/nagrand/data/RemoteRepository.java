@@ -1,39 +1,15 @@
 package com.eeseetech.nagrand.data;
 
-import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.eeseetech.nagrand.Global;
-import com.eeseetech.nagrand.Utils;
 import com.eeseetech.nagrand.api.DownloadListener;
 import com.eeseetech.nagrand.api.Provider;
-import com.eeseetech.nagrand.entity.RequestInfo;
-import com.eeseetech.nagrand.entity.RequestVideoDataEntity;
-import com.eeseetech.nagrand.entity.ResponseEntity;
 import com.eeseetech.nagrand.entity.Result;
-import com.google.gson.Gson;
+import com.eeseetech.nagrand.entity.VideoInfo;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Interceptor;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okio.Buffer;
-import okio.BufferedSource;
-import okio.ForwardingSource;
-import okio.Okio;
-import okio.Source;
 
 import static com.eeseetech.nagrand.entity.Result.SUCCESS;
 

@@ -7,8 +7,8 @@ android {
         applicationId "com.eeseetech.nagrand"
         minSdkVersion 17
         targetSdkVersion 19
-        //versionCode getVersionCodeTimestamp()
-        versionCode 2018071314
+        versionCode getVersionCodeTimestamp()
+        //versionCode 2018071314
         versionName "1.0.tv"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -22,7 +22,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -31,6 +31,32 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "nagrand_${defaultConfig.versionCode}.apk"
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+    flavorDimensions "default"
+    productFlavors({
+        internal{
+            buildConfigField "String","API_TYPE","\"test\""
+        }
+        product{
+            buildConfigField "String","API_TYPE","\"product\""
+        }
+        develop{
+            buildConfigField "String","API_TYPE","\"develop\""
+        }
+    })
 }
 
 dependencies {
@@ -39,6 +65,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
     implementation "com.android.support:multidex:1.0.3"

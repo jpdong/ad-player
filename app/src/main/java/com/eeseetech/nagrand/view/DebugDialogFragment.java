@@ -114,6 +114,9 @@ public class DebugDialogFragment extends DialogFragment {
                     if ("8231".equals(mPasswordBuilder.toString())) {
                         getActivity().finish();
                     }
+                    /*if ("*#*#1#*#*".equals(mPasswordBuilder.toString())) {
+                        throw new RuntimeException("test exception");
+                    }*/
                 }
             }
         }));
@@ -130,6 +133,8 @@ public class DebugDialogFragment extends DialogFragment {
                 }
             }
         });
+        TextView versionView = view.findViewById(R.id.tv_version);
+        versionView.setText("上海意视科技有限公司2016-2018 \n 当前版本：" + Global.versionName + "（" + Global.versionCode + "）");
     }
 
     static class DigitalAdapter extends RecyclerView.Adapter<DigitalViewHolder> {

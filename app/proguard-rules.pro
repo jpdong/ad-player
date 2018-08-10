@@ -18,4 +18,20 @@
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-renamesourcefileattribute SourceFile
+
+-keep class com.tencent.**{*;}
+-keep class okhttp3.**{*;}
+-keep class okio.**{*;}
+-keep class retrofit2.** { *; }
+-keep class com.google.** { *; }
+-keep class io.reactivex.**{*;}
+-keep class com.squareup.**{*;}
+-keep class org.reactivestreams.**{*;}
+-keep class javax.annotation.**{*;}
+-keep class org.conscrypt.**{*;}
+-keep class com.eeseetech.nagrand.entity.**{*;}
+-dontwarn javax.annotation.**
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn retrofit2.**

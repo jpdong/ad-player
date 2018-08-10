@@ -21,4 +21,6 @@ public class Global {
     public static final String REMOTE_MEDIA_SITE = "http://download.eeseetech.com/media/video/";
     public static boolean appConnected =false;
     public static String gateMacAddress = "000000000000";
+    public static String versionName = BuildConfig.VERSION_NAME;
+    public static int versionCode = BuildConfig.VERSION_CODE;
 }

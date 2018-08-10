@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.eeseetech.nagrand.player.PlayerActivity;
 import com.eeseetech.nagrand.service.MultiDisplayService;
 import com.eeseetech.nagrand.service.WorkService;
+import com.eeseetech.nagrand.view.DebugDialogFragment;
 import com.eeseetech.nagrand.view.FadingSeekBar;
 
 import java.lang.ref.WeakReference;
@@ -116,6 +118,16 @@ public class MainActivity extends Activity {
         super.onDestroy();
         Log.d(Global.TAG, "MainActivity/onDestroy:");
         unbindService(mServiceConnection);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            DebugDialogFragment fragment = new DebugDialogFragment();
+            fragment.show(getFragmentManager(),"DebugDialogFragment");
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void startPlayer() {

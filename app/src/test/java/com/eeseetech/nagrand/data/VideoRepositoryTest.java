@@ -3,7 +3,7 @@ package com.eeseetech.nagrand.data;
 import android.content.Context;
 import android.util.Log;
 
-import com.eeseetech.nagrand.Utils;
+import com.eeseetech.nagrand.entity.VideoInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,6 @@ import java.util.Queue;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

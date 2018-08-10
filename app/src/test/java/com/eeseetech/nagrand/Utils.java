@@ -5,13 +5,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Environment;
 import android.util.Log;
 
-import com.eeseetech.nagrand.Global;
-import com.eeseetech.nagrand.data.TimelistBean;
-import com.eeseetech.nagrand.data.VideoInfo;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.eeseetech.nagrand.entity.TimelistBean;
+import com.eeseetech.nagrand.entity.VideoInfo;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package com.eeseetech.nagrand.data;
+package com.eeseetech.nagrand.entity;
 
 /**
  * Created by dong on 2017/5/2.

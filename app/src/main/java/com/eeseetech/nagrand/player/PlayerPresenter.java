@@ -56,12 +56,16 @@ public class PlayerPresenter {
                         if (Global.LOG) {
                             Log.d(TAG, "onReceive:Conn connect");
                         }
-                        mSocketController.checkSocketState();
+                        if (Global.hasXServer) {
+                            mSocketController.checkSocketState();
+                        }
                     } else {
                         if (Global.LOG) {
                             Log.d(TAG, "Conn disconnect");
                         }
-                        mSocketController.sendAppDisconnect();
+                        if (Global.hasXServer) {
+                            mSocketController.sendAppDisconnect();
+                        }
                     }
 
                 }
@@ -90,7 +94,9 @@ public class PlayerPresenter {
     public PlayerPresenter(MediaView mediaView) {
         mMediaView = mediaView;
         mVideoRepository = VideoRepository.getInstance(mMediaView.getContext());
-        mSocketController = new SocketController(mStateCallback);
+        if (Global.hasXServer) {
+            mSocketController = new SocketController(mStateCallback);
+        }
     }
 
     public void deleteFile(String s) {
@@ -141,7 +147,7 @@ public class PlayerPresenter {
             public void run() {
                 sendScheduleSync();
             }
-        }, 2 * 60 * 1000);
+        }, 60 * 1000);
     }
 
     private void registerNetworkReceiver() {
@@ -208,18 +214,18 @@ public class PlayerPresenter {
     }
 
     public void sendPlayerStatus(String status) {
-
-        JSONObject data = new JSONObject();
-        try {
-            data.put("state", status);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.e(TAG, "sendPlayerStatus: " + e.toString());
+        if (Global.hasXServer) {
+            JSONObject data = new JSONObject();
+            try {
+                data.put("state", status);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e(TAG, "sendPlayerStatus: " + e.toString());
+            }
+            mSocketController.emit("app:go", data);
+            if (Global.LOG) {
+                Log.d(TAG, "VideoPresenter/sendPlayerStatus:" + status);
+            }
         }
-        mSocketController.emit("app:go", data);
-        if (Global.LOG) {
-            Log.d(TAG, "VideoPresenter/sendPlayerStatus:" + status);
-        }
-
     }
 }

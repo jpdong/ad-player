@@ -1,6 +1,5 @@
 package com.eeseetech.nagrand.entity;
 
-import com.eeseetech.nagrand.data.VideoInfo;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

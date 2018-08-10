@@ -1,11 +1,11 @@
 package com.eeseetech.nagrand.data;
 
-import android.content.SyncRequest;
 import android.util.Log;
 
 import com.eeseetech.nagrand.Global;
 import com.eeseetech.nagrand.Utils;
 import com.eeseetech.nagrand.api.DownloadListener;
+import com.eeseetech.nagrand.entity.VideoInfo;
 import com.eeseetech.nagrand.service.WorkService;
 
 import java.io.File;

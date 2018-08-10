@@ -1,5 +1,6 @@
-package com.eeseetech.nagrand.data;
+package com.eeseetech.nagrand.entity;
 
+import com.eeseetech.nagrand.entity.TimelistBean;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

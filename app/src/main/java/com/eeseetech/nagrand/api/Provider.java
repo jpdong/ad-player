@@ -1,12 +1,10 @@
 package com.eeseetech.nagrand.api;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.eeseetech.nagrand.Global;
 import com.eeseetech.nagrand.Utils;
-import com.eeseetech.nagrand.data.RemoteRepository;
-import com.eeseetech.nagrand.data.VideoInfo;
+import com.eeseetech.nagrand.entity.VideoInfo;
 import com.eeseetech.nagrand.entity.HistoryRequestData;
 import com.eeseetech.nagrand.entity.PlayResponseData;
 import com.eeseetech.nagrand.entity.ResponseData;
@@ -26,10 +24,8 @@ import java.util.Map;
 
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
@@ -37,9 +33,7 @@ import okio.ForwardingSource;
 import okio.Okio;
 import okio.Source;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Multipart;
 
 import static com.eeseetech.nagrand.entity.Result.FAIL;
 import static com.eeseetech.nagrand.entity.Result.NO_CHANGE;

@@ -1,14 +1,12 @@
 package com.eeseetech.nagrand.data;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.eeseetech.nagrand.Global;
 import com.eeseetech.nagrand.Utils;
 import com.eeseetech.nagrand.entity.PlayHistoryData;
-import com.eeseetech.nagrand.entity.RequestVideoDataEntity;
+import com.eeseetech.nagrand.entity.VideoInfo;
 
 import java.io.File;
 import java.util.ArrayList;
