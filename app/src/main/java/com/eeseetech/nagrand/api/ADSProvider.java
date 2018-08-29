@@ -1,5 +1,6 @@
 package com.eeseetech.nagrand.api;
 
+import com.eeseetech.nagrand.entity.MessageResponseData;
 import com.eeseetech.nagrand.entity.PlayResponseData;
 import com.eeseetech.nagrand.entity.ResponseData;
 import com.eeseetech.nagrand.entity.VideoResponseData;
@@ -25,4 +26,7 @@ public interface ADSProvider {
 
     @GET("ads/index.php?service=Log.History&v=1")
     Call<ResponseData> addPlayHistory(@Query("t") String timestamp, @Query("data") String data, @Query("sign") String sign);
+
+    @GET("ads/index.php?service=Sync.Msg&v=1")
+    Call<MessageResponseData> messages(@Query("t") String timestamp, @Query("data") String data, @Query("sign") String sign);
 }

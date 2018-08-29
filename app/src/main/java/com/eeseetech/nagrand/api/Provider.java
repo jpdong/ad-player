@@ -4,6 +4,9 @@ import android.support.annotation.Nullable;
 
 import com.eeseetech.nagrand.Global;
 import com.eeseetech.nagrand.Utils;
+import com.eeseetech.nagrand.entity.MessageInfo;
+import com.eeseetech.nagrand.entity.MessageRequestData;
+import com.eeseetech.nagrand.entity.MessageResponseData;
 import com.eeseetech.nagrand.entity.VideoInfo;
 import com.eeseetech.nagrand.entity.HistoryRequestData;
 import com.eeseetech.nagrand.entity.PlayResponseData;
@@ -141,6 +144,41 @@ public class Provider {
             } else {
                 result.code = FAIL;
                 result.data = false;
+                result.msg = responseData.msg;
+            }
+            return result;
+        } else {
+            return null;
+        }
+    }
+
+    public Result<List<MessageInfo>> messages(String tag, String macAddress) {
+        MessageRequestData requestData = new MessageRequestData(tag, macAddress);
+        String data = new Gson().toJson(requestData);
+        ADSProvider adsProvider = ServiceGenerator.createService(ADSProvider.class);
+        String timeStamp = String.valueOf(System.currentTimeMillis());
+        String sign = Utils.urlSign(data, "Sync.Msg", timeStamp, 1);
+        Call<MessageResponseData> call = adsProvider.messages(timeStamp, data, sign);
+        Response<MessageResponseData> response = null;
+        try {
+            response = call.execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (response != null) {
+            MessageResponseData responseData = response.body();
+            Result<List<MessageInfo>> result = new Result<>();
+            if (responseData.code == 0) {
+                result.code = SUCCESS;
+                MessageResponseData.DataBean dataBean = responseData.data;
+                if (dataBean.retcode == 0) {
+                    result.code = NO_CHANGE;
+                } else {
+                    result.data = dataBean.msgList;
+                    result.tag = dataBean.tag;
+                }
+            } else {
+                result.code = FAIL;
                 result.msg = responseData.msg;
             }
             return result;

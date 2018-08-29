@@ -15,7 +15,7 @@ public class Global {
     public static final String TAG = "nagrand";
     public static final boolean LOG = true;
     public static long timeGap = 0;
-    public static boolean hasXServer = false;
+    public static boolean hasXServer = true;
     public static boolean hasHDMI = false;
     public static final String LOCAL_MEDIA_DIR = Utils.getRootDirectory() + "/EeseeMedia/video/";
     public static final String REMOTE_MEDIA_SITE = "http://download.eeseetech.com/media/video/";

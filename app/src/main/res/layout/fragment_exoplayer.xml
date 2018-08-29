@@ -21,4 +21,18 @@
         android:visibility="gone">
 
     </FrameLayout>
+
+    <com.eeseetech.nagrand.view.MessageView
+        android:id="@+id/message_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:shadowColor="@color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        android:background="#197A7A7A"
+        />
 </RelativeLayout>

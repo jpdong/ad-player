@@ -36,7 +36,7 @@ public class MessageView extends android.support.v7.widget.AppCompatTextView imp
         setFocusableInTouchMode(true);
     }
 
-    interface StatusCallback {
+    public interface StatusCallback {
         void finish();
     }
 

@@ -76,7 +76,7 @@ public class SocketController {
                 public void call(Object... args) {
                     Log.d(Global.TAG, "SocketController/call:disconnect");
                     socketConnected = false;
-                    sendAppDisconnect();
+                    Global.appConnected = false;
                 }
             });
             socket.on(Socket.EVENT_CONNECT_ERROR, new Emitter.Listener() {
@@ -84,7 +84,7 @@ public class SocketController {
                 public void call(Object... args) {
                     Log.e(Global.TAG, "SocketController/call:connect_error");
                     socketConnected = false;
-                    sendAppDisconnect();
+                    Global.appConnected = false;
                 }
             });
             socket.on(Socket.EVENT_CONNECT_TIMEOUT, new Emitter.Listener() {
@@ -92,7 +92,7 @@ public class SocketController {
                 public void call(Object... args) {
                     Log.e(Global.TAG, "SocketController/call:connect_timeout");
                     socketConnected = false;
-                    sendAppDisconnect();
+                    Global.appConnected = false;
                 }
             });
             socket.on("x:load:file", new Emitter.Listener() {

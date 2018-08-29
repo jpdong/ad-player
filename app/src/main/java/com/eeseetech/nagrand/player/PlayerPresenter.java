@@ -15,6 +15,7 @@ import android.util.Log;
 import com.eeseetech.nagrand.Global;
 import com.eeseetech.nagrand.common.SocketController;
 import com.eeseetech.nagrand.data.VideoRepository;
+import com.eeseetech.nagrand.view.IMessage;
 import com.eeseetech.nagrand.view.MediaView;
 
 import org.json.JSONArray;
@@ -64,7 +65,7 @@ public class PlayerPresenter {
                             Log.d(TAG, "Conn disconnect");
                         }
                         if (Global.hasXServer) {
-                            mSocketController.sendAppDisconnect();
+                            //mSocketController.sendAppDisconnect();
                         }
                     }
 
@@ -131,6 +132,16 @@ public class PlayerPresenter {
 
     private void sendScheduleSync() {
         Log.d(Global.TAG, "PlayerPresenter/sendScheduleSync: schedule task start");
+        doSomeScheduleWork();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sendScheduleSync();
+            }
+        }, 60 * 1000);
+    }
+
+    private void doSomeScheduleWork() {
         mVideoRepository.updateFiles();
         List<String> list = mVideoRepository.getPlayList();
         if (Global.hasXServer) {
@@ -140,14 +151,10 @@ public class PlayerPresenter {
         } else {
             mMediaView.replaceList(list);
         }
-        mMediaView.replaceList(list);
+        if (mMediaView != null && mMediaView instanceof IMessage) {
+            ((IMessage) mMediaView).replaceMessages(mVideoRepository.getMessageList());
+        }
         mVideoRepository.checkCachedHistory();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                sendScheduleSync();
-            }
-        }, 60 * 1000);
     }
 
     private void registerNetworkReceiver() {

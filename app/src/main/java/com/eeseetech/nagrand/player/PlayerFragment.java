@@ -18,7 +18,10 @@ import android.widget.VideoView;
 
 import com.eeseetech.nagrand.Global;
 import com.eeseetech.nagrand.R;
+import com.eeseetech.nagrand.entity.MessageInfo;
+import com.eeseetech.nagrand.view.IMessage;
 import com.eeseetech.nagrand.view.MediaView;
+import com.eeseetech.nagrand.view.MessageView;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -47,7 +50,7 @@ import io.reactivex.disposables.CompositeDisposable;
  * Created by dongjiangpeng@eeseetech.com on 2017/4/6.
  */
 
-public class PlayerFragment extends Fragment implements MediaView {
+public class PlayerFragment extends Fragment implements MediaView,IMessage {
 
     private static final int MSG_READY = 10;
     private static final int MSG_PLAYING = 11;
@@ -59,16 +62,19 @@ public class PlayerFragment extends Fragment implements MediaView {
 
     private int mCurrentState = IDLE;
     private int mCurrentVideoPosition = 0;
+    private int mCurrentMsgPosition = 0;
     private boolean isPlaying = false;
-    private boolean needHidden = false;
+    private boolean isMessageShowing = false;
+
 
 
     private String mCurrentFileName;
     private List<String> mPlayList;
-
+    private List<MessageInfo> mMsgList;
 
     private PlayerStateHandler mHandler;
     private FrameLayout mIdleStateView;
+    private MessageView mMessageView;
     private CompositeDisposable mCompositeDisposable;
     private PlayerView mPlayerView;
     private SimpleExoPlayer mExoPlayer;
@@ -117,6 +123,7 @@ public class PlayerFragment extends Fragment implements MediaView {
         View view = inflater.inflate(R.layout.fragment_exoplayer, container, false);
         setPlayerView(view);
         setIdleView(view);
+        setMessageView(view);
         return view;
     }
 
@@ -141,7 +148,6 @@ public class PlayerFragment extends Fragment implements MediaView {
             Log.d(Global.TAG, "PlayerFragment/onStop:");
         }
         mPresenter.stop();
-        needHidden = true;
         mExoPlayer.stop();
         isPlaying = false;
     }
@@ -173,6 +179,18 @@ public class PlayerFragment extends Fragment implements MediaView {
     private void setIdleView(View view) {
         mIdleStateView = (FrameLayout) view.findViewById(R.id.layout_idle_state);
         mIdleStateView.setVisibility(View.VISIBLE);
+    }
+
+    private void setMessageView(View view) {
+        mMessageView = (MessageView) view.findViewById(R.id.message_view);
+        mMessageView.setSingleLine();
+        mMessageView.setStatusCallback(new MessageView.StatusCallback() {
+            @Override
+            public void finish() {
+                isMessageShowing = false;
+                showNextMessage();
+            }
+        });
     }
 
     private void playVideo() {
@@ -288,6 +306,48 @@ public class PlayerFragment extends Fragment implements MediaView {
 
     public boolean playerState() {
         return isPlaying;
+    }
+
+    @Override
+    public void replaceMessages(final List<MessageInfo> msgList) {
+        mHandler.post(new Runnable() {
+            public void run() {
+                if (msgList == null) {
+                    return;
+                }
+                mMsgList = msgList;
+                if (!isMessageShowing) {
+                    showNextMessage();
+                }
+            }
+        });
+    }
+
+    public void showNextMessage() {
+        if (mMsgList.size() == 0) {
+            return;
+        }
+        if (mCurrentMsgPosition >= mMsgList.size()) {
+            mCurrentMsgPosition = 0;
+        }
+        MessageInfo messageInfo = mMsgList.get(mCurrentMsgPosition);
+        mCurrentMsgPosition++;
+        mMessageView.setText(messageInfo.message);
+        setPosition(messageInfo.position);
+        mMessageView.showMessage();
+        isMessageShowing = true;
+    }
+
+    private void setPosition(String position) {
+        RelativeLayout.LayoutParams messageParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        if ("0".equals(position)) {
+            //messageParams.setMargins(0, 0, 0, 0);
+            messageParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        } else {
+            //messageParams.setMargins(0, getActivity().getWindowManager().getDefaultDisplay().getHeight() - 35, 0, 0);
+            messageParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        }
+        mMessageView.setLayoutParams(messageParams);
     }
 
     static class PlayerStateHandler extends Handler {

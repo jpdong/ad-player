@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.eeseetech.nagrand.Global;
 import com.eeseetech.nagrand.Utils;
+import com.eeseetech.nagrand.entity.MessageInfo;
 import com.eeseetech.nagrand.entity.PlayHistoryData;
 import com.eeseetech.nagrand.entity.VideoInfo;
 
@@ -29,9 +30,6 @@ public class VideoRepository {
     private static VideoRepository mInstance;
     private String mNetMacAddress;
     private String mSelfMacAddress;
-
-    private String mFileRequestTag = "0";
-    private String mListRequestTag = "0";
 
     private Queue<VideoInfo> mFileNeedDownload;
 
@@ -79,7 +77,6 @@ public class VideoRepository {
         }
         Map<String,VideoInfo> localData = loadListFromDB();
         Map<String,VideoInfo> remoteData = getRemoteFileList();
-        Log.d(Global.TAG, "VideoRepository/getDownloadFiles:local:" + localData + ",remotedata:" + remoteData);
         if (remoteData != null && localData != null) {
             downloadFiles = syncFileList(localData,remoteData);
         } else if (remoteData != null) {
@@ -92,7 +89,7 @@ public class VideoRepository {
 
     private Map<String, VideoInfo> getRemoteFileList() {
         //RequestVideoDataEntity requestEntity = new RequestVideoDataEntity(mFileRequestTag, FILE_LIST_TYPE, mNetMacAddress, mSelfMacAddress, mRequestVersion);
-        return mRemoteRepository.getRemoteFileList(mFileRequestTag);
+        return mRemoteRepository.getRemoteFileList();
     }
 
     public void insertDataToDB(final List<String> fileNameList) {
@@ -250,7 +247,7 @@ public class VideoRepository {
     }
 
     public List<String> getPlayIdList() {
-        return mRemoteRepository.getRemotePlayList(mListRequestTag);
+        return mRemoteRepository.getRemotePlayList();
     }
 
     public void addPlayHistory(String fileName, String timeStamp) {
@@ -277,5 +274,9 @@ public class VideoRepository {
                 }
             }
         }
+    }
+
+    public List<MessageInfo> getMessageList() {
+        return mRemoteRepository.getRemoteMessages();
     }
 }

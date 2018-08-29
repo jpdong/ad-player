@@ -9,7 +9,7 @@ android {
         targetSdkVersion 19
         versionCode getVersionCodeTimestamp()
         //versionCode 2018071314
-        versionName "1.0.tv"
+        versionName "1.2.tv"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
